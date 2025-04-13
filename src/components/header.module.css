@@ -1,0 +1,41 @@
+:root {
+  --input-height: 3.375rem;
+}
+
+.logoWrapper {
+  background: var(--gray-700);
+  height: 12.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addTaskForm {
+  display: flex;
+  gap: 0.5rem;
+  transform: translateY(calc(var(--input-height) / 2 * -1));
+}
+
+.addTaskForm input {
+  flex: 1;
+  height: var(--input-height);
+  background: var(--gray-500);
+  color: var(--gray-300);
+  border: 1px solid var(--gray-700);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.addTaskForm button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  height: var(--input-height);
+  background: var(--blue-600);
+  color: var(--gray-100);
+  font-size: 0.875rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
