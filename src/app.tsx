@@ -2,8 +2,23 @@ import { Header } from './components/header'
 import { Task } from './components/task'
 
 import styles from './app.module.css'
+import { useState } from 'react'
 
 export function App() {
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Estudar React', isCompleted: false },
+    { id: 2, title: 'Estudar TypeScript', isCompleted: true },
+  ])
+
+  function onCheckTask(taskId: number) {
+    const updatedTasks = tasks.map(task => task.id === taskId
+      ? { ...task, isCompleted: !task.isCompleted }
+      : task
+    )
+
+    setTasks(updatedTasks)
+  }
+
   return (
     <>
       <Header />
@@ -16,11 +31,15 @@ export function App() {
           </div>
 
           <ul className={styles.tasks}>
-            <Task />
-            <Task />
-            <Task />
-            <Task />
-            <Task />
+            {tasks.map(task => {
+              return (
+                <Task
+                  key={task.id}
+                  task={task}
+                  onCheckTask={onCheckTask}
+                />
+              )
+            })}
           </ul>
         </main>
       </div>
