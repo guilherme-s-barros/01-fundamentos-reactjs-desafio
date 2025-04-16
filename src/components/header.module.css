@@ -13,7 +13,7 @@
 .addTaskForm {
   display: flex;
   gap: 0.5rem;
-  transform: translateY(calc(var(--input-height) / 2 * -1));
+  margin-top: calc(var(--input-height) / 2 * -1);
 }
 
 .addTaskForm input {

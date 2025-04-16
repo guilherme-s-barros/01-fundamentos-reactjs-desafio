@@ -11,13 +11,15 @@ export function Header() {
         <img src={logo} alt="Logotipo do To-do TaskList" />
       </div>
 
-      <form className={`container ${styles.addTaskForm}`}>
-        <input type="text" placeholder="Adicione uma nova tarefa" />
-        <button type="submit">
-          Criar
-          <PlusCircle size={20} weight="bold" />
-        </button>
-      </form>
+      <div className="container">
+        <form className={styles.addTaskForm}>
+          <input type="text" placeholder="Adicione uma nova tarefa" />
+          <button type="submit">
+            Criar
+            <PlusCircle size={20} weight="bold" />
+          </button>
+        </form>
+      </div>
     </header>
   )
 }
