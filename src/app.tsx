@@ -12,6 +12,16 @@ export function App() {
     { id: 2, title: 'Estudar TypeScript', isCompleted: true },
   ])
 
+  const allTasks = tasks.length
+
+  const completedTasks = tasks.reduce((total, task) => {
+    if (task.isCompleted) {
+      total += 1
+    }
+
+    return total
+  }, 0)
+
   function checkTask(taskId: number) {
     const updatedTasks = tasks.map(task => task.id === taskId
       ? { ...task, isCompleted: !task.isCompleted }
@@ -34,11 +44,13 @@ export function App() {
       <div className="container">
         <main className={styles.wrapper}>
           <div className={styles.tasksInfo}>
-            <strong>Tarefas criadas <span>0</span></strong>
-            <strong>Concluídas <span>0 de 0</span></strong>
+            <strong>Tarefas criadas <span>{allTasks}</span></strong>
+            <strong>
+              Concluídas <span>{completedTasks} de {allTasks}</span>
+            </strong>
           </div>
 
-          {tasks.length === 0 ? (
+          {allTasks === 0 ? (
             <div className={styles.emptyTasks}>
               <ClipboardText size={56} weight="thin" />
               <strong>Você ainda não tem tarefas cadastradas</strong>
