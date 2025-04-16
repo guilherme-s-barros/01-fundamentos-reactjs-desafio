@@ -1,8 +1,10 @@
+import { useState } from 'react'
+import { ClipboardText } from 'phosphor-react'
+
 import { Header } from './components/header'
 import { Task } from './components/task'
 
 import styles from './app.module.css'
-import { useState } from 'react'
 
 export function App() {
   const [tasks, setTasks] = useState([
@@ -36,18 +38,26 @@ export function App() {
             <strong>Concluídas <span>0 de 0</span></strong>
           </div>
 
-          <ul className={styles.tasks}>
-            {tasks.map(task => {
-              return (
-                <Task
-                  key={task.id}
-                  task={task}
-                  onCheckTask={checkTask}
-                  onDeleteTask={deleteTask}
-                />
-              )
-            })}
-          </ul>
+          {tasks.length === 0 ? (
+            <div className={styles.emptyTasks}>
+              <ClipboardText size={56} weight="thin" />
+              <strong>Você ainda não tem tarefas cadastradas</strong>
+              <p>Crie tarefas e organize seus itens a fazer</p>
+            </div>
+          ) : (
+            <ul className={styles.tasks}>
+              {tasks.map(task => {
+                return (
+                  <Task
+                    key={task.id}
+                    task={task}
+                    onCheckTask={checkTask}
+                    onDeleteTask={deleteTask}
+                  />
+                )
+              })}
+            </ul>
+          )}
         </main>
       </div>
     </>
