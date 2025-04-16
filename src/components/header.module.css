@@ -20,10 +20,18 @@
   flex: 1;
   height: var(--input-height);
   background: var(--gray-500);
-  color: var(--gray-300);
+  color: var(--gray-100);
   border: 1px solid var(--gray-700);
   border-radius: 0.5rem;
   padding: 1rem;
+}
+
+.addTaskForm input::placeholder {
+  color: var(--gray-300);
+}
+
+.addTaskForm input:not(:placeholder-shown) {
+  box-shadow: 0 0 0 2px var(--purple-600);
 }
 
 .addTaskForm button {
@@ -38,4 +46,10 @@
   border: none;
   border-radius: 0.5rem;
   padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addTaskForm button:hover {
+  background: var(--blue-500);
 }

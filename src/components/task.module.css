@@ -10,6 +10,7 @@
 }
 
 .task input[type=checkbox] {
+  flex-shrink: 0;
   appearance: none;
   height: 1.25rem;
   width: 1.25rem;
@@ -20,6 +21,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: background-color 0.2s, border-color 0.2s;
+  /* overflow: hidden; */
 }
 
 .task input[type=checkbox]:hover {
@@ -37,13 +41,23 @@
   border-color: var(--purple-500);
 }
 
-.task input[type=checkbox]:checked::after {
+.task input[type=checkbox]::after {
   content: '';
   width: 0.25rem;
   height: 0.5rem;
   border-bottom: 2px solid var(--gray-100);
   border-right: 2px solid var(--gray-100);
-  transform: rotate(45deg) translateY(-1px);
+
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+}
+
+.task input[type=checkbox]:checked::after {
+  animation: check-in 0.4s forwards;
+}
+
+.task input[type=checkbox].interacted:not(:checked)::after {
+  animation: check-out 0.4s forwards;
 }
 
 .task input[type=checkbox]:checked + p {
@@ -74,4 +88,33 @@
 
 .deleteTaskButtonText {
   display: none;
+}
+
+@keyframes check-in {
+  0% {
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: rotate(45deg) scale(1.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes check-out {
+  0% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+  }
 }
