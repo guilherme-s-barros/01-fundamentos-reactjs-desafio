@@ -53,3 +53,8 @@
 .addTaskForm button:hover {
   background: var(--blue-500);
 }
+
+.addTaskForm button:focus {
+  background: var(--blue-500);
+  box-shadow: 0 0 0 2px var(--blue-600);
+}

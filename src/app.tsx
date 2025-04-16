@@ -9,10 +9,10 @@ export function App() {
       <Header />
 
       <main className="container">
-        <header>
+        <div className={styles.tasksInfo}>
           <strong>Tarefas criadas <span>0</span></strong>
           <strong>Concluídas <span>0</span></strong>
-        </header>
+        </div>
 
         <ul className={styles.tasks}>
           <Task />
