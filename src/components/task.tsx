@@ -3,16 +3,16 @@ import { Trash } from 'phosphor-react'
 
 import styles from './task.module.css'
 
-interface Task {
-  id: number
+export interface TaskData {
+  id: string
   title: string
   isCompleted: boolean
 }
 
 interface TaskProps {
-  task: Task
-  onCheckTask(taskId: number): void
-  onDeleteTask(taskId: number): void
+  task: TaskData
+  onCheckTask(taskId: string): void
+  onDeleteTask(taskId: string): void
 }
 
 export function Task({ task, onCheckTask, onDeleteTask }: TaskProps) {

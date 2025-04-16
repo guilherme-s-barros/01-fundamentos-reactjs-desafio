@@ -1,16 +1,14 @@
 import { useState } from 'react'
+import { v4 as uuidV4 } from 'uuid'
 import { ClipboardText } from 'phosphor-react'
 
 import { Header } from './components/header'
-import { Task } from './components/task'
+import { Task, TaskData } from './components/task'
 
 import styles from './app.module.css'
 
 export function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: 'Estudar React', isCompleted: false },
-    { id: 2, title: 'Estudar TypeScript', isCompleted: true },
-  ])
+  const [tasks, setTasks] = useState<TaskData[]>([])
 
   const allTasks = tasks.length
 
@@ -22,7 +20,17 @@ export function App() {
     return total
   }, 0)
 
-  function checkTask(taskId: number) {
+  function createTask(taskTitle: string) {
+    const newTask: TaskData = {
+      id: uuidV4(),
+      title: taskTitle,
+      isCompleted: false,
+    }
+
+    setTasks(state => [...state, newTask])
+  }
+
+  function checkTask(taskId: string) {
     const updatedTasks = tasks.map(task => task.id === taskId
       ? { ...task, isCompleted: !task.isCompleted }
       : task
@@ -31,7 +39,7 @@ export function App() {
     setTasks(updatedTasks)
   }
 
-  function deleteTask(taskId: number) {
+  function deleteTask(taskId: string) {
     const updatedTasks = tasks.filter(task => task.id !== taskId)
 
     setTasks(updatedTasks)
@@ -39,7 +47,7 @@ export function App() {
 
   return (
     <>
-      <Header />
+      <Header onCreateTask={createTask} />
 
       <div className="container">
         <main className={styles.wrapper}>
