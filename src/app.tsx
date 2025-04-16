@@ -10,11 +10,17 @@ export function App() {
     { id: 2, title: 'Estudar TypeScript', isCompleted: true },
   ])
 
-  function onCheckTask(taskId: number) {
+  function checkTask(taskId: number) {
     const updatedTasks = tasks.map(task => task.id === taskId
       ? { ...task, isCompleted: !task.isCompleted }
       : task
     )
+
+    setTasks(updatedTasks)
+  }
+
+  function deleteTask(taskId: number) {
+    const updatedTasks = tasks.filter(task => task.id !== taskId)
 
     setTasks(updatedTasks)
   }
@@ -36,7 +42,8 @@ export function App() {
                 <Task
                   key={task.id}
                   task={task}
-                  onCheckTask={onCheckTask}
+                  onCheckTask={checkTask}
+                  onDeleteTask={deleteTask}
                 />
               )
             })}
