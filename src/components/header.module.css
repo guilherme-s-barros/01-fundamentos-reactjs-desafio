@@ -50,7 +50,12 @@
   transition: background-color 0.2s;
 }
 
-.addTaskForm button:hover {
+.addTaskForm button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.addTaskForm button:not(:disabled):hover {
   background: var(--blue-500);
 }
 

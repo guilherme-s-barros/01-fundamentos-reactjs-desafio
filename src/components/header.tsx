@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 import { PlusCircle } from 'phosphor-react'
 
 import logo from '../assets/logo.svg'
@@ -12,8 +12,13 @@ interface HeaderProps {
 export function Header({ onCreateTask }: HeaderProps) {
   const [taskTitle, setTaskTitle] = useState('')
 
-  function handleChangeTaskTitle(event: ChangeEvent<HTMLInputElement>) {
+  function handleNewTaskTitleChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('')
     setTaskTitle(event.target.value)
+  }
+
+  function handleNewTaskTitleInvalid(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Descreva o que você precisa fazer')
   }
 
   function handleCreateTask(event: FormEvent) {
@@ -22,6 +27,8 @@ export function Header({ onCreateTask }: HeaderProps) {
     onCreateTask(taskTitle)
     setTaskTitle('')
   }
+
+  const isNewTaskTitleEmpty = taskTitle.length === 0
 
   return (
     <header className={styles.header}>
@@ -35,10 +42,12 @@ export function Header({ onCreateTask }: HeaderProps) {
             type="text"
             placeholder="Adicione uma nova tarefa"
             value={taskTitle}
-            onChange={handleChangeTaskTitle}
+            onChange={handleNewTaskTitleChange}
+            onInvalid={handleNewTaskTitleInvalid}
+            required
           />
 
-          <button type="submit">
+          <button type="submit" disabled={isNewTaskTitleEmpty}>
             Criar
             <PlusCircle size={20} weight="bold" />
           </button>
